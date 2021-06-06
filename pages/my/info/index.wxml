@@ -4,8 +4,14 @@
   <i-panel title="真实姓名">
     <i-input value="{{ userInfo.realName }}" name="realName" maxlength="-1" />
   </i-panel>
+  <i-panel title="出生日期">
+    <picker class="weui-btn" mode="date" value="{{userInfo.birthDay}}" bindchange="bindDateChange">
+      <view class="i-cell i-input exam-pick-input">{{ userInfo.birthDay }}</view>
+      <i-input value="{{ userInfo.birthDay }}" class="exam-hidden" name="birthDay" maxlength="-1" />
+    </picker>
+  </i-panel>
   <i-panel title="年龄">
-    <i-input value="{{ userInfo.age }}" name="age" maxlength="-1" />
+    <i-input value="{{ userInfo.age }}" name="age" maxlength="-1" disabled/>
   </i-panel>
   <i-panel title="性别">
     <radio-group class="radio-group my-info-sex" name="sex">
@@ -15,12 +21,7 @@
       </label>
     </radio-group>
   </i-panel>
-  <i-panel title="出生日期">
-    <picker class="weui-btn" mode="date" value="{{userInfo.birthDay}}" bindchange="bindDateChange">
-      <view class="i-cell i-input exam-pick-input">{{ userInfo.birthDay }}</view>
-      <i-input value="{{ userInfo.birthDay }}" class="exam-hidden" name="birthDay" maxlength="-1" />
-    </picker>
-  </i-panel>
+
   <i-panel title="手机">
     <i-input value="{{ userInfo.phone }}" name="phone" maxlength="-1" />
   </i-panel>

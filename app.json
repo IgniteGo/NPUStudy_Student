@@ -16,7 +16,7 @@
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "学之思",
+    "navigationBarTitleText": "小瓜答题宝",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark"
   },
@@ -34,7 +34,7 @@
       },
       {
         "pagePath": "pages/exam/index/index",
-        "text": "试卷",
+        "text": "题库",
         "iconPath": "/assets/tabBar/exam.png",
         "selectedIconPath": "/assets/tabBar/exam-select.png"
       },

@@ -1,23 +1,27 @@
 <!--pages/user/bind/index.wxml-->
 <view class="card-image-container">
-  <image src="/assets/logo2.png" style="width:175px;height:147px"></image>
+  <image src="/assets/logo2.png" style="width:147px;height:147px"></image>
 </view>
 
 <form bindsubmit='formSubmit'>
   <i-panel title="用户名">
-    <i-input value="{{ userName }}" name="userName" maxlength="-1"  />
+    <i-input value="{{ userName }}" name="userName" maxlength="-1" 
+    placeholder="请输入用户名" />
   </i-panel>
 
   <i-panel title="密码">
-    <i-input value="{{ password }}" name="password" maxlength="-1" />
+    <i-input password='{{passwordType}}' value="{{ password }}" name="password" maxlength="-1" type='password' placeholder="请输入密码" />
   </i-panel>
 
   <view>
     <button class="i-btn i-btn- i-btn-primary i-btn-square" form-type='submit'>登录</button>
   </view>
   <view style="padding:font-size: 26rpx;color: #606266;padding: 20rpx 50rpx;">
-    学之思是一款学校考试系统，仅供学校内部学生使用，需要提供账号密码。没有账号?
-    <text  bindtap="register" style="color:#4399fc">马上注册</text>
+    <text id="verse">立志宜思真品格，读书须尽苦功夫。</text>
+    <view style="height:20px"></view>
+    <view>没有账号?
+      <text  bindtap="register" style=" ">马上注册</text>
+    </view>
   </view>
   <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 </form>

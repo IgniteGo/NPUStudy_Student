@@ -37,6 +37,7 @@ Page({
           timeLimitPaper: res.response.timeLimitPaper,
           pushPaper: res.response.pushPaper
         });
+        console.log(res.response)
       }
     }).catch(e => {
       _this.setData({

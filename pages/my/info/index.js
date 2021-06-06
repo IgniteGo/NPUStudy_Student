@@ -4,7 +4,8 @@ Page({
   data: {
     userInfo: null,
     spinShow: false,
-    levelIndex: 0
+    levelIndex: 0,
+    ccAge:0
   },
   onLoad: function(options) {
     this.loadUserInfo()
@@ -15,6 +16,10 @@ Page({
       spinShow: true
     });
     app.formPost('/api/wx/student/user/current', null).then(res => {
+      var util=require('../../../utils/util')
+      let curTime=util.formatTime(new Date());
+      res.response.age =  curTime.slice(0,4) - res.response.birthDay.slice(0,4)
+     
       if (res.code == 1) {
         _this.setData({
           userInfo: res.response,
@@ -42,6 +47,12 @@ Page({
     } = e.detail;
     this.setData({
       "userInfo.birthDay": value
+    })
+    var util=require('../../../utils/util')
+    let curTime=util.formatTime(new Date());
+    let curAge =  curTime.slice(0,4) - value.slice(0,4)
+    this.setData({
+      "userInfo.age": curAge
     })
   },
   formSubmit: function(e) {

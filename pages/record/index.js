@@ -56,12 +56,23 @@ Page({
             tableData: override ? re.list : this.data.tableData.concat(re.list),
             total: re.pages
           });
-          if (re.pageNum >= re.pages) {
+          if(re.total>0){
+            this.setData({
+              loadMoreLoad: false,
+              loadMoreTip: ''
+            });
+          }else{
             this.setData({
               loadMoreLoad: false,
               loadMoreTip: '暂无数据'
             });
           }
+          // if (re.pageNum >= re.pages) {
+          //   this.setData({
+          //     loadMoreLoad: false,
+          //     loadMoreTip: '暂无数据'
+          //   });
+          // }
         }
       }).catch(e => {
         _this.setData({

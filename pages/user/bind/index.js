@@ -5,6 +5,7 @@ Page({
     userName: '',
     password: '',
   },
+  
   formSubmit: function(e) {
     let _this = this
     _this.setData({

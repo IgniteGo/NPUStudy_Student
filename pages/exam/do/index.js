@@ -14,7 +14,11 @@ Page({
     remainTimeStr: '',
     modalShow: false,
     result: 0,
-    timeOutShow: false
+    timeOutShow: false,
+    timeShow: false,
+    timeEndShow: false,
+    sTime:"",
+    eTime:"",
   },
   onLoad: function(options) {
     let paperId = options.id
@@ -24,6 +28,35 @@ Page({
     });
     app.formPost('/api/wx/student/exampaper/select/' + paperId, null)
       .then(res => {
+        console.log(res);
+        if(res.response.limitDateTime!=null){
+          var util=require('../../../utils/util')
+          let curTime=Date.parse(util.formatTime(new Date()));
+          let startTime = Date.parse(res.response.limitDateTime[0]);
+          let endTime = Date.parse(res.response.limitDateTime[1]);
+          // sTime = res.response.limitDateTime[0];
+          // eTime = res.response.limitDateTime[1];
+          _this.setData({
+            sTime: res.response.limitDateTime[0],
+            eTime: res.response.limitDateTime[1]
+          });
+          console.log(curTime)
+          console.log(res);
+          console.log(startTime);
+          console.log(endTime);
+          if(curTime<startTime){
+            _this.setData({
+              timeShow: true
+            });
+            return;
+          }else if(curTime>endTime){
+            _this.setData({
+              timeEndShow: true
+            });
+            return;
+          }
+        }
+        
         _this.setData({
           spinShow: false
         });
@@ -66,6 +99,11 @@ Page({
   returnRecord() {
     wx.reLaunch({
       url: '/pages/record/index',
+    });
+  },
+  returnT() {
+    wx.reLaunch({
+      url: '/pages/exam/index/index'
     });
   },
   timeOut() {

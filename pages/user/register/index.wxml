@@ -1,15 +1,15 @@
 <wxs module="enumItem" src="../../../wxs/enumItem.wxs"></wxs>
 <view class="card-image-container">
-  <image src="/assets/logo2.png" style="width:175px;height:147px"></image>
+  <image src="/assets/logo2.png" style="width:147px;height:147px"></image>
 </view>
 
 <form bindsubmit='formSubmit'>
   <i-panel title="用户名">
-    <i-input value="{{ userName }}" name="userName" maxlength="-1" />
+    <i-input value="{{ userName }}" name="userName" maxlength="-1" placeholder="请输入用户名" />
   </i-panel>
 
   <i-panel title="密码">
-    <i-input value="{{ password }}" name="password" maxlength="-1" />
+    <i-input value="{{ password }}" name="password" maxlength="-1 "type='password' placeholder="请输入密码" />
   </i-panel>
   <i-panel title="年级">
     <picker mode="selector" range="{{ enumItem.state.user.levelEnum }}" range-key="{{'value'}}" value="{{levelIndex}}" bindchange="bindLevelChange">

@@ -11,6 +11,7 @@
     "i-action-sheet": "/component/iView/action-sheet/index",
     "i-modal": "/component/iView/modal/index",
     "i-message": "/component/iView/message/index",
-    "i-spin": "/component/iView/spin/index"
+    "i-spin": "/component/iView/spin/index",
+    "i-toast": "/component/iView//toast/index"
   }
 }

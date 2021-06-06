@@ -5,7 +5,7 @@ const mtjwxsdk = require('./utils/mtj-wx-sdk.js');
 
 App({
   globalData: {
-    baseAPI: "http://localhost:8000",
+    baseAPI: "http://10.61.80.194:8000",
     pageSize: 20
   },
   onLaunch: function() {
@@ -61,6 +61,69 @@ App({
         success(res) {
           
           if (res.statusCode !== 200 || typeof res.data !== 'object') {
+            reject('网络出错')
+            return false;
+          }
+
+          if (res.data.code === 400) {
+            let token = res.data.response
+            wx.setStorageSync('token', token)
+            wx.request({
+              url: _this.globalData.baseAPI + url,
+              header: {
+                'content-type': 'application/x-www-form-urlencoded',
+                'token': wx.getStorageSync('token')
+              },
+              method: 'POST',
+              data,
+              success(result) {
+                resolve(result.data);
+                return true;
+              }
+            })
+          } else if (res.data.code === 401) {
+            wx.reLaunch({
+              url: '/pages/user/bind/index',
+            });
+            return false;
+          } else if (res.data.code === 500) {
+            reject(res.data.message)
+            return false;
+          } else if (res.data.code === 501) {
+            reject(res.data.message)
+            return false;
+          } else {
+            resolve(res.data);
+            return true;
+          }
+        },
+        fail(res) {
+          reject(res.errMsg)
+          return false;
+        },
+        complete(res) {
+          wx.hideNavigationBarLoading();
+        }
+      })
+    })
+  },
+  upLoadIcn: function(url, filePath) {
+    let _this = this
+    return new Promise(function(resolve, reject) {
+      wx.showNavigationBarLoading();
+      wx.uploadFile({
+        filePath: filePath,
+        name: 'file',
+        url: _this.globalData.baseAPI + url,
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'token': wx.getStorageSync('token')
+        },
+        method: 'POST',
+        
+        success(res) {
+          
+          if (res.statusCode !== 200) {
             reject('网络出错')
             return false;
           }

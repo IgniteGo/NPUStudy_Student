@@ -7,8 +7,8 @@
       <h1>{{paper.name}}</h1>
     </view>
     <view class="exam-result">
-      <h1 class="">试卷得分: {{answer.score}}</h1>
-      <h1 class="exam-result-detail">试卷耗时: {{answer.doTime}}秒</h1>
+      <h1 class="">得分: {{answer.score}}</h1>
+      <h1 class="exam-result-detail">耗时: {{answer.doTime}}秒</h1>
     </view>
 
     <i-panel title="{{titleItem.name}}" wx:for="{{paper.titleItems}}" wx:for-item="titleItem" wx:key="{{titleItem.name}}" i-class="exam-panel-title">
