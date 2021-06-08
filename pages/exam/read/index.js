@@ -25,6 +25,7 @@ Page({
     });
     app.formPost('/api/wx/student/exampaper/answer/read/' + paperId, null)
       .then(res => {
+        console.log(res)
         _this.setData({
           spinShow: false
         });

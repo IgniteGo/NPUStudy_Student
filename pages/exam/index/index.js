@@ -12,7 +12,38 @@ Page({
       pageSize: app.globalData.pageSize
     },
     tableData: [],
-    total: 1
+    tableData2: [],
+    total: 1,
+    current: 'tab1',
+    current_scroll: 'tab1',
+    subjects:[]
+  },
+  handleChange ({ detail }) {
+    this.setData({
+        current: detail.key
+    });
+  },
+
+  handleChangeScroll ({ detail }) {
+    this.setData({
+        current_scroll: detail.key
+    });
+    
+    if(detail.key==0){
+      this.setData({
+        tableData: this.data.tableData2
+      });
+    }else{
+      let arr = [];
+      for(let i=0;i<this.data.tableData2.length;i++){
+          if(detail.key==this.data.tableData2[i].subjectId){
+            arr.push(this.data.tableData2[i]);
+          }
+      }
+      this.setData({
+        tableData: arr
+      });
+    }
   },
   onLoad: function(options) {
     this.setData({
@@ -68,13 +99,38 @@ Page({
       });
       wx.stopPullDownRefresh()
       if (res.code === 1) {
-        console.log(res)
         const re = res.response
         _this.setData({
           ['queryParam.pageIndex']: re.pageNum,
           tableData: override ? re.list : this.data.tableData.concat(re.list),
           total: re.pages
         });
+        _this.setData({
+          tableData2: this.data.tableData
+        });
+        if(this.data.tableData2.length>0){
+          let arr = [];
+          let obj = {};
+          let dd = this.data.tableData2;
+          let myMap = new Map();
+          myMap.set(dd[0].subjectId,dd[0].subjectName)
+          obj.subjectId = dd[0].subjectId;
+          obj.subjectName = dd[0].subjectName;
+          arr.push(obj)
+          for(let i=1;i<dd.length;i++){
+            
+            if(!myMap.has(dd[i].subjectId)){
+              let obj1 = {};
+              myMap.set(dd[i].subjectId,dd[i].subjectName)
+              obj1.subjectId = dd[i].subjectId;
+              obj1.subjectName = dd[i].subjectName;
+              arr.push(obj1)
+            }
+          }
+          this.setData({
+            subjects:arr
+          });
+        }
         if(re.total>0){
           this.setData({
             loadMoreLoad: false,
