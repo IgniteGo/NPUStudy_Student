@@ -5,6 +5,12 @@
 		<i-tab key="4" title="限时答题" />
 	</i-tabs>
 	<view class="exam-tab-view">
+	<i-tabs current="{{ current_scroll }}" scroll bindchange="handleChangeScroll">
+    <i-tab key="0" title="全部"></i-tab>
+    <i-tab  wx:for="{{subjects}}" key="{{item.subjectId}}" title="{{item.subjectName}}">
+		</i-tab>
+		
+	</i-tabs>
 		<i-cell-group>
 			<i-cell wx:for="{{tableData}}" data-item="item" wx:key="{{item.id}}" title="{{item.name}}" is-link url="/pages/exam/do/index?id={{item.id}}" value="{{item.subjectName}}"></i-cell>
 		</i-cell-group>
